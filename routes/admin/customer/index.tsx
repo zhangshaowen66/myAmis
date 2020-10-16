@@ -11,68 +11,10 @@ const schema = {
     type: 'page',
     title: '会员列表',
     subTitle: '展示基本的增删改查',
-    toolbar: [
-        // {
-        //     type: "button",
-        //     actionType: "dialog",
-        //     label: "新增",
-        //     icon: 'fa fa-plus pull-left',
-        //     primary: true,
-        //     dialog: {
-        //         title: "新增",
-        //         body: {
-        //             type: "form",
-        //             api: "post:/api/customer",
-        //             controls: [
-        //                 {
-        //                     type: "text",
-        //                     name: "engine",
-        //                     label: "Engine",
-        //                     required: true
-        //                 },
-        //                 {
-        //                     type: "divider"
-        //                 },
-        //                 {
-        //                     type: "text",
-        //                     name: "browser",
-        //                     label: "Browser",
-        //                     required: true
-        //                 },
-        //                 {
-        //                     type: "divider"
-        //                 },
-        //                 {
-        //                     type: "text",
-        //                     name: "platform",
-        //                     label: "Platform(s)",
-        //                     required: true
-        //                 },
-        //                 {
-        //                     type: "divider"
-        //                 },
-        //                 {
-        //                     type: "text",
-        //                     name: "version",
-        //                     label: "Engine version"
-        //                 },
-        //                 {
-        //                     type: "divider"
-        //                 },
-        //                 {
-        //                     type: "text",
-        //                     name: "grade",
-        //                     label: "CSS grade"
-        //                 }
-        //             ]
-        //         }
-        //     }
-        // }
-    ],
     body: {
         type: "crud",
         // draggable: true,
-        api: "/api/customer",
+        api: "https://houtai.baidu.com/api/sample?perPage=5",
         filter: {
             title: "",
             submitText: "",
@@ -122,11 +64,13 @@ const schema = {
             {
                 name: "id",
                 label: "ID",
+
             },
 
             {
-                name: "name",
+                "type": "operation",
                 label: "姓名",
+                body:  "<span>1233</span>"
             },
 
             {

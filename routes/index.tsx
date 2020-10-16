@@ -3,11 +3,12 @@ import {
     ToastComponent,
     AlertComponent,
 } from 'amis';
+
+import 'antd/dist/antd.css';
 import { Route, Switch, Redirect, BrowserRouter as Router, HashRouter } from "react-router-dom";
 import { observer } from 'mobx-react';
 import { IMainStore } from '../stores';
 import Login from './Login';
-import Register from './Register';
 import AdminRoute from './admin/index';
 import NotFound from './404';
 
@@ -32,7 +33,6 @@ export default observer(function({store}:{
                 <Switch>
                     <Redirect to={`${ContextPath}/login`} from={`${ContextPath}/`} exact />
                     <Route path={`${ContextPath}/login`} exact component={Login} />
-                    <Route path={`${ContextPath}/register`} exact component={Register} />
                     
                     {store.user.isAuthenticated ? (
                         <Route path={`${ContextPath}/admin`} component={AdminRoute} />

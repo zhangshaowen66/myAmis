@@ -3,3 +3,106 @@
     width: 100%;
     height: 100%;
 }
+.clcc{
+    color: #CCCCCC;
+}
+.cl33{
+    color: #333333;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6,ul, ol, p{
+    margin: 0;
+    padding: 0;
+}
+ul li {
+    list-style: none;
+    margin: 0;
+}
+.disFlex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.wb100{
+    width: 100%;
+    .a-TplField.is-inline{
+        display: block !important;
+    }
+}
+.text-c{
+    text-align: center;
+}
+.text-r{
+    text-align: right;
+}
+.text-l{
+    text-align: left;
+}
+
+.mt-10{
+    margin-top: 10px;
+}
+.mt-15{
+    margin-top: 15px;
+}
+.mt-17{
+    margin-top: 17px;
+}
+.mt-20{
+    margin-top: 20px;
+}
+.mt-24{
+    margin-top: 24px;
+}
+.mt-33{
+    margin-top: 33px;
+}
+.mt-40{
+    margin-top: 40px;
+}
+.mr-5{
+    margin-right: 5px;
+}
+.mr-15{
+    margin-right: 15px;
+}
+.mr-36{
+    margin-right: 36px;
+}
+.ml-14{
+    margin-left: 14px;
+}
+.ml-52{
+    margin-left: 52px;
+}
+.mr-140{
+    margin-right: 140px !important;
+}
+.mb-16{
+    margin-bottom: 16px;
+}
+.mb-22{
+    margin-bottom: 22px;
+}
+.my15{
+    margin: 0 15px;
+}
+.cl-ff{
+    color: #ffffff;
+}
+.bgff{
+    background: #ffffff;
+}
+.borN{
+    border: none;
+}
+.a-Panel{
+    border: none;
+    box-shadow: none;
+    margin-bottom: 0;
+}

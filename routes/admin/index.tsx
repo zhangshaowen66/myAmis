@@ -5,6 +5,7 @@ import {
     Button,
     AsideNav
 } from 'amis';
+import { Breadcrumb } from 'antd';
 import { IMainStore } from '../../stores';
 import { inject, observer } from 'mobx-react';
 import UserInfo from '../../components/UserInfo';
@@ -15,6 +16,7 @@ import AdvancedForm from './form/Advanced';
 import Wizard from './form/Wizard';
 import Editor from './form/Editor';
 import CustomIndex from './customer/index';
+import CustomList from './customer/list';
 
 type NavItem = {
     label: string;
@@ -26,72 +28,127 @@ type NavItem = {
 };
 const navigations:Array<NavItem> = [
     {
-        label: '导航',
         children: [
             {
-                path: 'dashboard',
-                label: '客户管理',
-                icon: 'glyphicon glyphicon-signal',
-                component: Dashboard
-            },
-
-          /*  {
-                label: '表单页面',
                 icon: 'glyphicon glyphicon-edit',
+                label: '客户池',
                 children: [
                     {
-                        label: '常规表单',
-                        path: 'form/basic',
-                        component: BasicForm,
-                        children: [
-                            {
-                                label: '三级目录测试',
-                                path: 'form/basic/advanced',
-                                component: AdvancedForm
-                            }
-                        ]
+                        label: '客户列表',
+                        path: 'customer/CustomList',
+                        component: CustomList
                     },
-
                     {
-                        label: '复杂表单',
-                        path: 'form/advanced',
-                        component: AdvancedForm
+                        label: '客户管理',
+                        path: 'customer/index',
+                        component: CustomIndex
                     },
-
                     {
-                        label: '向导',
-                        path: 'form/wizard',
-                        component: Wizard
+                        label: '潜在客户',
+                        path: 'customer/index',
+                        component: CustomIndex
                     },
-
                     {
-                        label: '代码编辑器',
-                        path: 'form/editor',
-                        component: Editor
-                    }
-                ]
-            },
-
-            {
-                label: '会员管理',
-                children: [
-                    {
-                        label: '列表',
+                        label: '标签管理',
                         path: 'customer/index',
                         component: CustomIndex
                     }
                 ]
-            }*/
+            },
+            {
+                label: '营销',
+                icon: 'glyphicon glyphicon-edit',
+                children: [
+                    {
+                        label: '微信群发',
+                        path: 'customer/index',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '朋友圈营销',
+                        path: 'customer/index',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '批量加好友',
+                        path: 'customer/index',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '素材管理',
+                        path: 'customer/index',
+                        component: BasicForm,
+                    }
+                ]
+            },
+            {
+                label: '风控',
+                icon: 'glyphicon glyphicon-edit',
+                children: [
+                    {
+                        label: '敏感词管理',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '敏感词操作',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '通话录音',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '手机短信',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '企业应用商城',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '应用权限管理',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    }
+                ]
+            },
+            {
+                label: '管理',
+                icon: 'glyphicon glyphicon-signal',
+                children: [
+                    {
+                        label: '微信号管理',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '员工管理',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '设备管理',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    },
+                    {
+                        label: '权限管理',
+                        path: 'form/basic',
+                        component: BasicForm,
+                    }
+                ]
+            }
         ]
     },
 ];
 
 let PATH_PREFIX = '/admin';
-let ContextPath = '';
 
-if (process.env.NODE_ENV === 'production') {
-    ContextPath = '/amis-admin'
-}
 
 
 function navigations2route(pathPrefix = PATH_PREFIX) {
@@ -103,7 +160,7 @@ function navigations2route(pathPrefix = PATH_PREFIX) {
                 routes.push(
                     <Route 
                         key={routes.length + 1} 
-                        path={item.path[0] === '/' ? (ContextPath + item.path) : `${ContextPath}${pathPrefix}/${item.path}`} 
+                        path={item.path[0] === '/' ? item.path : `${pathPrefix}/${item.path}`}
                         component={item.component} 
                         exact
                     />
@@ -112,7 +169,7 @@ function navigations2route(pathPrefix = PATH_PREFIX) {
                 routes.push(
                     <Route 
                         key={routes.length + 1} 
-                        path={item.path[0] === '/' ? (ContextPath + item.path) : `${ContextPath}${pathPrefix}/${item.path}`} 
+                        path={item.path[0] === '/' ?  item.path : `${pathPrefix}/${item.path}`}
                         getComponent={item.getComponent} 
                         exact
                     />
@@ -146,6 +203,7 @@ export default class Admin extends React.Component<AdminProps> {
 
         return (
             <div>
+
                 <div className={`a-Layout-brandBar`}>
                     <button
                         onClick={store.toggleOffScreen}
@@ -226,10 +284,10 @@ export default class Admin extends React.Component<AdminProps> {
                     );
     
                     return link.path
-                        ? (link.active ? <a>{children}</a> : <Link to={link.path[0] === '/' ? (ContextPath + link.path) : `${ContextPath}${PATH_PREFIX}/${link.path}`}>{children}</Link>)
+                        ? (link.active ? <a>{children}</a> : <Link to={link.path[0] === '/' ? link.path : `${PATH_PREFIX}/${link.path}`}>{children}</Link>)
                         : (<a onClick={link.onClick ? link.onClick : link.children ? () => toggleExpand(link) : undefined}>{children}</a>);
                 }}
-                isActive={(link:any) => isActive(link.path && link.path[0] === '/' ? (ContextPath + link.path) : `${ContextPath}${PATH_PREFIX}/${link.path}`, location)}
+                isActive={(link:any) => isActive(link.path && link.path[0] === '/' ?  link.path : `${PATH_PREFIX}/${link.path}`, location)}
             />
         );
     }
@@ -246,9 +304,10 @@ export default class Admin extends React.Component<AdminProps> {
                 offScreen={store.offScreen}
             >
                 <Switch>
-                    <Redirect to={`${ContextPath}${PATH_PREFIX}/dashboard`} from={`${ContextPath}${PATH_PREFIX}/`} exact />
+                    <Redirect to={`${PATH_PREFIX}/dashboard`} from={`${PATH_PREFIX}/`} exact />
+
                     {navigations2route()}
-                    <Redirect to={`${ContextPath}/404`} />
+                    <Redirect to={`/404`} />
                 </Switch>
             </Layout>
         );

@@ -2,7 +2,17 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const apiMocker = require("mocker-api");
-
+var proxy=null;
+if (process.env.NODE_ENV === 'development') {
+    proxy={
+        '/api': {
+            target:process.env.VUE_APP_SERVER_URL,
+            pathRewrite: {
+                '^/api': ''
+            }
+        },
+    }
+}
 module.exports = {
   entry: {
     app: "./index.tsx",
